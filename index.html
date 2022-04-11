@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta name="description" content="This is where your description goes">
+    	<meta name="keywords" content="one, two, three">
+
+		<title>NASA Image and Video Library</title>
+
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+
+		<header>
+			<h1>Search</h1>
+		</header>
+		<section id="section-search-input">
+			<table>
+				<tr>
+					<td>
+						<label id="label-q" for="q">Q</label>
+					</td>
+					<td>
+						<input type="text" id="input-q" name="q" value="" placeholder="Free text search terms to compare to all indexed metadata.">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="center">Center</label>
+					</td>
+					<td>
+						<input type="text" id="input-center" name="center" value="" placeholder="NASA center which published the media.">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="description">Description</label>
+					</td>
+					<td>
+						<input type="text" id="input-description" name="description" value="" 
+						placeholder="Terms to search for in “Description” fields.">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="description-508">508 Description</label>
+					</td>
+					<td>
+						<input type="text" id="input-description-508" name="description-508" value="" 
+						placeholder="Terms to search for in “508 Description” fields.">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label id="label-keywords" for="keywords">Keywords</label>
+					</td>
+					<td>
+						<input type="text" id="input-keywords" name="keywords" value="" 
+						placeholder="Terms to search for in “Keywords” fields. Separate multiple values with commas.">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="location">Location</label>
+					</td>
+					<td>
+						<input type="text" id="input-location" name="location" value="" 
+						placeholder="Terms to search for in “Location” fields.">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="media-type">Media Type</label>
+					</td>
+					<td>
+						<input type="text" id="input-media-type" name="media-type" value="" 
+						placeholder="Media types to restrict the search to. Available types: [“image”, “audio”, “video”]. Separate multiplevalues with commas.">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="nasa-id">Nasa ID</label>
+					</td>
+					<td>
+						<input type="text" id="input-nasa-id" name="nasa-id" value="" 
+						placeholder="The media asset’s NASA ID.">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="page">Page</label>
+					</td>
+					<td>
+						<input type="number" id="input-page" name="page" value="" 
+						placeholder="Page number, starting at 1, of results to get.">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="photographer">Photographer</label>
+					</td>
+					<td>
+						<input type="text" id="input-photographer" name="photographer" value="" 
+						placeholder="The primary photographer’s name.">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="secondary-creator">Secondary Creator</label>
+					</td>
+					<td>
+						<input type="text" id="input-secondary-creator" name="secondary-creator" value="" 
+						placeholder="A secondary photographer/videographer’s name.">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="title">Title</label>
+					</td>
+					<td>
+						<input type="text" id="input-title" name="title" value="" 
+						placeholder="Terms to search for in “Title” fields.">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="year-start">Year Start</label>
+					</td>
+					<td>
+						<input type="text" id="input-year-start" name="year-start" value="" 
+						placeholder="The start year for results. Format: YYYY.">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="year-end">Year End</label>
+					</td>
+					<td>
+						<input type="text" id="input-year-end" name="year-end" value="" 
+						placeholder="The end year for results. Format: YYYY.">
+					</td>
+				</tr>
+			</table>
+			<button id="button" type="button" name="button">Search</button>
+		</section>
+		<section id="section-search-result">
+			<ul>
+				
+			</ul>
+			<h2>Name</h2>
+			<img src="" alt="">
+			<h3>Instructions</h3>
+		</section>
+
+
+		<script type="text/javascript" src="js/main.js"></script>
+	</body>
+</html>
