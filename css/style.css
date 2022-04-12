@@ -10,9 +10,10 @@
 /******************************************
 /* LAYOUT
 /*******************************************/
-img{
+img, video {
   display: block;
   margin: 0 auto;
+  max-width: 100%;
 }
 input {
   width: 51vw;
@@ -20,6 +21,12 @@ input {
 header, #section-search-input {
   display: flex;
   justify-content: center;
+}
+#section-search-result > ul {
+  display: flex;
+}
+#section-search-result > ul > * {
+  width: 50%;
 }
 
 /******************************************

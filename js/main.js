@@ -27,51 +27,82 @@ class NASAObject {
     this.description508 = data.description_508
     this.photographer = data.photographer
     this.secondaryCreator = data.secondary_creator
+
     this.links = nasaObject.links
     this.href = nasaObject.href
-    this.fetchMediaUrls()
+    this.listItem = document.createElement("li")
   }
 
   display() {
-    let listItem = document.createElement("li")
 
     let title = document.createElement("h2")
     title.textContent = this.title
-    listItem.appendChild(title)
-
-    let mediaContainer = document.createElement("section")
-    let mediaList = document.createElement("ul")
-    console.log(this.mediaUrls.length)
-    for (let i = 0; i < this.mediaUrls.length; i++) {
-      console.log(this.mediaUrls[i])
-      let mediaListItem = document.createElement("li")
-      mediaListItem.textContent = this.mediaUrls[i]
-      mediaList.appendChild(mediaListItem)
-    }
-    mediaContainer.appendChild(mediaList)
-    listItem.appendChild(mediaContainer)
+    this.listItem.appendChild(title)
 
     let paragraphContainer = document.createElement("section")
     let description = document.createElement("p")
     description.textContent = this.description
     paragraphContainer.appendChild(description)
-    listItem.appendChild(paragraphContainer)
+    this.listItem.appendChild(paragraphContainer)
 
-    searchResultListTag.appendChild(listItem)
+    this.requestMediaUrls((error, data) => {
+      if (error != null) {
+        console.log(error)
+      } else {
+        this.mediaUrls = data
+        this.displayMedia()
+      }
+    })
+
+    searchResultListTag.appendChild(this.listItem)
   }
 
-  fetchMediaUrls() {
+  requestMediaUrls(callback) {
     if (!this.mediaUrls) {
-      this.mediaUrls = []
-      fetch(this.href)
-        .then(result => result.json())
-        .then(data => {
-          this.mediaUrls.push(...data)
-        }).catch(error => {
-          console.log(error)
-        })
+      var xmlhttprequest = new XMLHttpRequest();
+      xmlhttprequest.open('GET', this.href, true);
+      xmlhttprequest.responseType = 'json';
+
+      xmlhttprequest.onload = function() {
+          var status = xmlhttprequest.status;
+          if (status == 200) {
+            callback(null, xmlhttprequest.response);
+          } else {
+            callback(status, xmlhttprequest.response);
+          }
+      };
+  
+      xmlhttprequest.send();
+    } else {
+      callback(null, this.mediaUrls)
     }
-    return this.mediaUrls
+  }
+
+  displayMedia() {
+    let mediaContainer = document.createElement("section")
+    switch (this.mediaType) {
+      case "video":
+        let videoTag = document.createElement("video")
+        let sourceTag = document.createElement("source")
+        for (let i = 0; i < this.mediaUrls.length; i++) {
+          if (getExtension(this.mediaUrls[i]) == ".mp4") {
+            sourceTag.src = this.mediaUrls[i]
+            break
+          }
+        }
+        sourceTag.type="video/mp4"
+        videoTag.appendChild(sourceTag)
+        mediaContainer.appendChild(videoTag)
+        break
+      case "image":
+        let imageTag = document.createElement("img")
+        imageTag.src = this.mediaUrls[0]
+        mediaContainer.appendChild(imageTag)
+        break
+      default:
+        break
+    }
+    this.listItem.appendChild(mediaContainer)
   }
 }
 
@@ -131,7 +162,8 @@ function getFetch(){
         let items = data.collection.items
         // console.log(items)
         searchResultListTag.innerHTML = ""
-        for (let i = 0; i < items.length; i++) {
+        // for (let i = 0; i < items.length; i++) {
+        for (let i = 0; i < 2; i++) {
           let nasaData = new NASAObject(items[i])
           nasaData.display()
           // console.log(nasaData)
@@ -140,4 +172,13 @@ function getFetch(){
       .catch(error => {
           console.log(error)
       });
+}
+
+function getExtension(fileString) {
+  let i
+  for (i = fileString.length - 1; i >= 0; i--) {
+    if (fileString[i] == ".") {
+      return fileString.substring(i)
+    }
+  }
 }
